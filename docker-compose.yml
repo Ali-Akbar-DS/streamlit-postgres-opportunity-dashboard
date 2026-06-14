@@ -1,7 +1,7 @@
-version: "3.9"
+
 services:
   postgres_db:
-    image: postgres:latest
+    image: postgres:15    # <--- CHANGE THIS LINE
     container_name: opportunity_postgres
     environment:
       POSTGRES_DB: student_opportunities_db
@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_new:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/01_init.sql
       - ./database/seed_data.sql:/docker-entrypoint-initdb.d/02_seed_data.sql
     restart: unless-stopped
@@ -43,4 +43,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  postgres_data:
+  postgres_data_new:
